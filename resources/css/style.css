@@ -28,3 +28,17 @@ body {
 nav {
   background-color: rgb(233, 224, 214);
 }
+
+.items {
+  display: grid;
+  grid-template-columns: repeat(4, 120px);
+  grid-column-gap: 200px;
+  /* margin-left: 100px; made the page look weird so I decided to omit. */
+  margin-top: 50px;
+}
+
+.item {
+  border: solid 1px;
+  width: 300px;
+  margin-top: 30px;
+}
