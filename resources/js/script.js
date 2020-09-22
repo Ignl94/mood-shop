@@ -10,6 +10,21 @@ for (let i = 0; i < data.length; i++) {
   img.width = 300;
   img.height = 300;
 
+  let description = document.createElement("p");
+  description.innerText = data[i].desc;
+
+  let price = document.createElement("p");
+  price.innerText = data[i].price;
+
+  let button = document.createElement("button");
+  button.id = data[i].name;
+
+  button.dataset.price = data[i].price;
+  button.innerHTML = "Add To Cart";
+
   newDiv.appendChild(img);
+  newDiv.appendChild(description);
+  newDiv.appendChild(price);
+  newDiv.appendChild(button);
   itemsContainer.appendChild(newDiv);
 }
