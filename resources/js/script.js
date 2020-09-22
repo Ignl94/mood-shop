@@ -28,3 +28,5 @@ for (let i = 0; i < data.length; i++) {
   newDiv.appendChild(button);
   itemsContainer.appendChild(newDiv);
 }
+
+// ----------------------------------------------- Shopping Cart Portion ------------------------------------------- //
