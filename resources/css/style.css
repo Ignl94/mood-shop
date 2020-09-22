@@ -24,3 +24,7 @@ body {
   padding: 0.5em;
   text-decoration: none;
 }
+
+nav {
+  background-color: rgb(233, 224, 214);
+}
