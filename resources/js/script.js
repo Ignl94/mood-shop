@@ -30,3 +30,18 @@ for (let i = 0; i < data.length; i++) {
 }
 
 // ----------------------------------------------- Shopping Cart Portion ------------------------------------------- //
+
+const cart = [];
+
+function addItem(name, price) {
+  const item = { name: name, price: price, qty: 1 };
+  cart.push(item);
+}
+
+function showItem() {
+  console.log(cart);
+}
+
+addItem("apple", 0.99);
+addItem("orange", 1.25);
+showItem();
