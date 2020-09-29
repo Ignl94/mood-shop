@@ -32,14 +32,33 @@ for (let i = 0; i < data.length; i++) {
 // ----------------------------------------------- Shopping Cart Portion ------------------------------------------- //
 
 const cart = [];
+qty = 0;
+total = 0;
 
 function addItem(name, price) {
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].name === name) {
+      cart[i].qty += 1;
+    }
+  }
+
   const item = { name: name, price: price, qty: 1 };
   cart.push(item);
 }
 
 function showItem() {
-  console.log(cart);
+  for (let i = 0; i < cart.length; i++) {
+    qty += cart[i].qty;
+  }
+  console.log(`You have ${qty} items in your cart.`);
+  for (let i = 0; i < cart.length; i++) {
+    console.log(` -${cart[i].name} $${cart[i].price} x ${cart[i].qty}`);
+  }
+}
+
+function displayTotal() {
+  total += cart[i].price * cart[i].qty;
+  console.log(`Total in cart: $${total}`);
 }
 
 addItem("apple", 0.99);
