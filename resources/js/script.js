@@ -32,13 +32,13 @@ for (let i = 0; i < data.length; i++) {
 // ----------------------------------------------- Shopping Cart Portion ------------------------------------------- //
 
 const cart = [];
-qty = 0;
-total = 0;
+const total = displayTotal().toFixed(2);
 
 function addItem(name, price) {
   for (let i = 0; i < cart.length; i++) {
     if (cart[i].name === name) {
       cart[i].qty += 1;
+      return;
     }
   }
 
@@ -46,19 +46,28 @@ function addItem(name, price) {
   cart.push(item);
 }
 
-function showItem() {
+function qtyCount() {
+  let qty = 0;
   for (let i = 0; i < cart.length; i++) {
     qty += cart[i].qty;
   }
-  console.log(`You have ${qty} items in your cart.`);
+  return qty;
+}
+
+function showItem() {
+  console.log(`You have ${qtyCount()} items in your cart.`);
   for (let i = 0; i < cart.length; i++) {
     console.log(` -${cart[i].name} $${cart[i].price} x ${cart[i].qty}`);
   }
+  console.log(`Total in cart: $${total}`);
 }
 
 function displayTotal() {
-  total += cart[i].price * cart[i].qty;
-  console.log(`Total in cart: $${total}`);
+  let total = 0;
+  for (let i = 0; i < cart.length; i++) {
+    total += cart[i].price * cart[i].qty;
+  }
+  return total;
 }
 
 addItem("apple", 0.99);
