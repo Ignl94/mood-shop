@@ -32,7 +32,6 @@ for (let i = 0; i < data.length; i++) {
 // ----------------------------------------------- Shopping Cart Portion ------------------------------------------- //
 
 const cart = [];
-const total = displayTotal().toFixed(2);
 
 function addItem(name, price) {
   for (let i = 0; i < cart.length; i++) {
@@ -59,7 +58,7 @@ function showItem() {
   for (let i = 0; i < cart.length; i++) {
     console.log(` -${cart[i].name} $${cart[i].price} x ${cart[i].qty}`);
   }
-  console.log(`Total in cart: $${total}`);
+  console.log(`Total in cart: $${displayTotal()}`);
 }
 
 function displayTotal() {
@@ -70,6 +69,29 @@ function displayTotal() {
   return total;
 }
 
+// -------------------------------------- button function section ------------------------------------------- //
+
+function removeItem(name, qty = 0) {
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].name === name) {
+      if (cart[i].qty > 0) {
+        cart[i].qty -= qty;
+      }
+
+      if (cart[i].qty < 1 || qty === 0) {
+        cart.splice(i, 1);
+      }
+    }
+  }
+}
+
 addItem("apple", 0.99);
 addItem("orange", 1.25);
+addItem("carrot", 1.0);
+addItem("carrot", 1.0);
+addItem("carrot", 1.0);
+addItem("juice", 5.0);
+showItem();
+removeItem("carrot", 2);
+removeItem("juice");
 showItem();
