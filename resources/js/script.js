@@ -28,6 +28,12 @@ for (let i = 0; i < data.length; i++) {
   newDiv.appendChild(button);
   itemsContainer.appendChild(newDiv);
 }
+// ---------------------------------------- Item Lists in Footer ----------------------------------------------- //
+
+const itemList = document.getElementById("item-list");
+const itemTotal = document.getElementById("item-total");
+itemTotal.innerHTML = `<h2>You have 0 items in your cart.</h2>`;
+const priceTotal = document.getElementById("price-total");
 
 // ----------------------------------------------- Shopping Cart Portion ------------------------------------------- //
 
@@ -54,11 +60,15 @@ function qtyCount() {
 }
 
 function showItem() {
-  console.log(`You have ${qtyCount()} items in your cart.`);
+  itemTotal.innerHTML = `<h2>You have ${qtyCount()} items in your cart.</h2> \n`;
+  let itemString = "";
   for (let i = 0; i < cart.length; i++) {
-    console.log(` -${cart[i].name} $${cart[i].price} x ${cart[i].qty}`);
+    itemString += `<li> -${cart[i].name} $${cart[i].price} x ${
+      cart[i].qty
+    } = $${cart[i].price * cart[i].qty} </li>`;
   }
-  console.log(`Total in cart: $${displayTotal()}`);
+  itemList.innerHTML = itemString;
+  priceTotal.innerHTML = `<h4>Total in cart: $${displayTotal()}</h4> \n`;
 }
 
 function displayTotal() {
@@ -85,13 +95,9 @@ function removeItem(name, qty = 0) {
   }
 }
 
-addItem("apple", 0.99);
-addItem("orange", 1.25);
-addItem("carrot", 1.0);
-addItem("carrot", 1.0);
-addItem("carrot", 1.0);
-addItem("juice", 5.0);
-showItem();
-removeItem("carrot", 2);
-removeItem("juice");
+addItem("apple", 3.0);
+addItem("pear", 3.0);
+addItem("peach", 3.0);
+addItem("peach", 3.0);
+
 showItem();
