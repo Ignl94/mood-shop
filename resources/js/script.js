@@ -28,6 +28,13 @@ for (let i = 0; i < data.length; i++) {
   newDiv.appendChild(button);
   itemsContainer.appendChild(newDiv);
 }
+const all_items_button = Array.from(document.querySelectorAll("button"));
+all_items_button.forEach((elt) =>
+  elt.addEventListener("click", () => {
+    addItem(elt.getAttribute("id"), elt.getAttribute("data-price"));
+    showItem();
+  })
+);
 // ---------------------------------------- Item Lists in Footer ----------------------------------------------- //
 
 const itemList = document.getElementById("item-list");
@@ -63,9 +70,10 @@ function showItem() {
   itemTotal.innerHTML = `<h2>You have ${qtyCount()} items in your cart.</h2> \n`;
   let itemString = "";
   for (let i = 0; i < cart.length; i++) {
+    let itemTotal = cart[i].price * cart[i].qty;
     itemString += `<li> -${cart[i].name} $${cart[i].price} x ${
       cart[i].qty
-    } = $${cart[i].price * cart[i].qty} </li>`;
+    } = $${itemTotal.toFixed(2)} </li>`;
   }
   itemList.innerHTML = itemString;
   priceTotal.innerHTML = `<h4>Total in cart: $${displayTotal()}</h4> \n`;
@@ -76,7 +84,7 @@ function displayTotal() {
   for (let i = 0; i < cart.length; i++) {
     total += cart[i].price * cart[i].qty;
   }
-  return total;
+  return total.toFixed(2);
 }
 
 // -------------------------------------- button function section ------------------------------------------- //
@@ -94,10 +102,4 @@ function removeItem(name, qty = 0) {
     }
   }
 }
-
-addItem("apple", 3.0);
-addItem("pear", 3.0);
-addItem("peach", 3.0);
-addItem("peach", 3.0);
-
-showItem();
+console.log(all_items_button);
