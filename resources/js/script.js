@@ -41,6 +41,34 @@ const itemList = document.getElementById("item-list");
 const itemTotal = document.getElementById("item-total");
 itemTotal.innerHTML = `<h2>You have 0 items in your cart.</h2>`;
 const priceTotal = document.getElementById("price-total");
+const inputUpdate = document.getElementById("update");
+
+itemList.onclick = function (e) {
+  if (e.target && e.target.classList.contains("remove")) {
+    const name = e.target.dataset.name;
+    removeItem(name);
+    showItem();
+  } else if (e.target && e.target.classList.contains("remove1")) {
+    const name = e.target.dataset.name;
+    removeItem(name, 1);
+    showItem();
+  } else if (e.target && e.target.classList.contains("add1")) {
+    const name = e.target.dataset.name;
+    addItem(name);
+    showItem();
+  } else {
+    return;
+  }
+};
+
+itemList.onchange = function (e) {
+  if (e.target && e.target.classList.contains("update")) {
+    const qty = e.target.value;
+    const name = e.target.dataset.name;
+    parseInt(updateCart(name, qty));
+    showItem();
+  }
+};
 
 // ----------------------------------------------- Shopping Cart Portion ------------------------------------------- //
 
@@ -55,6 +83,17 @@ function addItem(name, price) {
   }
 
   const item = { name: name, price: price, qty: 1 };
+  cart.push(item);
+}
+
+function updateCart(name, qty) {
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].name === name) {
+      cart[i].qty = qty;
+      return;
+    }
+  }
+  const item = { name: name, price: price, qty: qty };
   cart.push(item);
 }
 
@@ -73,7 +112,12 @@ function showItem() {
     let itemTotal = cart[i].price * cart[i].qty;
     itemString += `<li> -${cart[i].name} $${cart[i].price} x ${
       cart[i].qty
-    } = $${itemTotal.toFixed(2)} </li>`;
+    } = $${itemTotal.toFixed(2)}
+    <button class="remove" data-name="${cart[i].name}">Remove</button> 
+    <button class="remove1" data-name="${cart[i].name}">-</button>
+    <button class="add1" data-name="${cart[i].name}">+</button>
+    <input type="number" class="update" data-name = "${cart[i].name}" />
+    </li>`;
   }
   itemList.innerHTML = itemString;
   priceTotal.innerHTML = `<h4>Total in cart: $${displayTotal()}</h4> \n`;
@@ -102,4 +146,3 @@ function removeItem(name, qty = 0) {
     }
   }
 }
-console.log(all_items_button);
